@@ -14,15 +14,13 @@ use App\Http\Controllers\ImagesController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
-    Route::get('/dashboard',[ImagesController::class, 'index'])->name('dashboard');
-    Route::get('/image',[ImagesController::class, 'add']);
-    Route::post('/image',[ImagesController::class, 'create']);
-    Route::get('/image/{image}', [ImagesController::class, 'view']);
-    Route::get('/image/{image}/edit', [ImagesController::class, 'edit']);
-    Route::post('/image/{image}', [ImagesController::class, 'update']);
+  Route::get('/dashboard',[ImagesController::class, 'index'])->name('dashboard');
+  Route::get('/image',[ImagesController::class, 'add']);
+  Route::post('/image',[ImagesController::class, 'create']);
+  Route::get('/image/{image}', [ImagesController::class, 'view']);
+  Route::get('/image/{image}/edit', [ImagesController::class, 'edit']);
+  Route::post('/image/{image}', [ImagesController::class, 'update']);
 });
