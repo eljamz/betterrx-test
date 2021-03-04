@@ -20,7 +20,7 @@ class ImagesController extends Controller {
       if ($request->file('image_file')->isValid()) {
         $validated = $request->validate([
           'name' => 'string|max:40',
-          'image' => 'mimes:png|max:1014',
+          'image_file' => 'required|mimes:png|max:1014',
         ]);
         $b64_file = base64_encode(file_get_contents($request->image_file->path()));
         $response = Http::asForm()->post('https://test.rxflodev.com', [
@@ -35,7 +35,8 @@ class ImagesController extends Controller {
         }
         return redirect('/dashboard');
       }
-    } 
+    }
+    return view('add')->withErrors(["error" => "No file added!"]);
   }
 
   public function view(Image $image) {
